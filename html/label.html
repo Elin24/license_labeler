@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="static/favicon.ico" />
+    <title>License Labeler</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link href="static/bootstrap-slider.min.css" rel="stylesheet">
+    <script src="static/jquery.min.js"></script>
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <script type='text/javascript' src="static/bootstrap-slider.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- <h1>license labeler</h1> -->
+        <div class="alert alert-success hide" id="saveshow">save success !!</div>
+        <hr />
+        <div class="row">
+            <div class="col-xs-3 col-sm-3">
+                <button type="button" class="btn btn-primary" id="newcar">new car</button>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+                <button type="button" class="btn btn-success" id="rectify">rectify</button>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+                <button type="button" class="btn btn-danger" id="deletecar">delete</button>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+                <button type="button" class="btn btn-info" id="savebtn">save</button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="left">
+            <canvas id="videoclips" width="240" height="580"></canvas>
+            <div id="lineStyleControler" class="row">
+                <div class="col-xs-4 col-sm-4"><b>line size:</b></div>
+                <div class="col-xs-8 col-sm-8">
+                    <input id="wslider" data-slider-id='ex1Slider' type="text" data-slider-min="1"
+                        data-slider-max="6" data-slider-step="1" data-slider-value="3" />
+                </div>
+                <div class="col-xs-2 col-sm-2"><b>color:</b></div>
+                <div class="col-xs-10 col-sm-10">
+                    <button type="button" id="pc-red" class="btn btn-danger"></button>
+                    <button type="button" id="pc-green" class="btn btn-success"></button>
+                    <button type="button" id="pc-orange" class="btn btn-warning"></button>
+                </div>
+            </div>
+        </div>
+        <div id="body">
+            <canvas id="labelboard" width="1280" height="720"></canvas>
+            <div class="row hide" id='endconfirm'>
+                <div class="col-xs-12 col-sm-12">
+                    <button type="button" class="btn btn-success btn-lg" id="ok">FINISH LABELING THIS VIDEO ?</button>
+                </div>
+            </div>
+            <input id="ex12a" type="text"/>
+            <!-- <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="0" aria-valuemin="0"
+                    aria-valuemax="100" style="width: 40%;">
+                    <span>1</span>
+                </div>
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0"
+                    aria-valuemax="100" style="width: 20%;">
+                    <span>{{ videoLen }}</span>
+                </div>
+            </div> -->
+        </div>
+        <div id="right">
+            <h5 class="page-header"></h5>
+            <div class="well well-lg">no label</div>
+            <!-- <div class="alert alert-success">成功！很好地完成了提交。</div>
+            <div class="alert alert-info">信息！请注意这个信息。</div>
+             -->
+        </div>
+    </div>
+    <script>
+        var user = '{{ name }}';
+        var videofold = 'static/{{ framedir }}', videoLen = {{ videoLen }};
+        var clipStack = 4;
+    </script>
+    <script src="static/gtlabel.js"></script>
+    <script src="static/global.js"></script>
+    <script src="static/button.js"></script>
+</body>
+
+</html>

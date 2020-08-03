@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="static/favicon.ico" />
+    <title>Summary</title>
+    <link rel="stylesheet" href="static/style.css">
+    <link rel="stylesheet" href="static/bootstrap.min.css">
+    <script src="static/jquery.min.js"></script>
+    <script src="static/highcharts.js"></script>
+    <script src="static/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div id="container" style="height:{{height}}px">
+
+            </div>
+        </div>
+        <div class="row">
+            <table class="table table-bordered">
+                <caption> <h1>标注情况统计表 </h1></caption>
+                <thead>
+                    <tr class="text-center">
+                        <th></th>
+                        {% for player in playerlist %} <th style='text-align: center;'>{{player.username}}</th> {% endfor %}
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>含标注图像数目</td>
+                        {% for player in playerlist %} <td>{{ player.labelframenum }}</td> {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>总标注图像数目</td>
+                        {% for player in playerlist %} <td>{{ player.allframenum }}</td> {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>总标注车牌数</td>
+                        {% for player in playerlist %} <td>{{ player.carnum }}</td> {% endfor %}
+                    </tr>
+                    <tr>
+                        <td>总标注车牌类别数</td>
+                        {% for player in playerlist %} <td>{{ player.spcarnum }}</td> {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        var chart = Highcharts.chart('container', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: '标注视频数量统计'
+            },
+            xAxis: {
+                categories: [ {% for player in playerlist %} "{{player.username}}", {% endfor %} ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '视频数量'
+                }
+            },
+            legend: {
+                /* 图例显示顺序反转
+                 * 这是因为堆叠的顺序默认是反转的，可以设置 
+                 * yAxis.reversedStacks = false 来达到类似的效果 
+                 */
+                reversed: true
+            },
+            tooltip: {
+                //shared: true,
+                useHTML: true,
+                headerFormat: '<strong>{point.key}</strong><table>',
+                pointFormat: '<tr><td>{series.name}: </td>'
+                + '<td style="text-align: right"><b>{point.y}</b></td></tr>'
+                + '<tr><td>总数: </td>'
+                + '<td style="text-align: right"><b>{point.total}</b></td></tr>',
+                footerFormat: '</table>'
+            },
+            plotOptions: {
+                series: {
+                    stacking: 'normal'
+                }
+            },
+            series: [ {
+                name: '未完成',
+                data: [{% for player in playerlist %} {{player.undonum}}, {% endfor %}],
+                color: '#0d233a'
+            }, {
+                name: '正在标注',
+                data: [{% for player in playerlist %} {{player.halfnum}}, {% endfor %}],
+                color: '#eea236'
+            }, {
+                name: '已完成',
+                data: [{% for player in playerlist %} {{player.donenum}}, {% endfor %}],
+                color: '#4cae4c'
+            }]
+        });
+    </script>
+</body>
+
+</html>
