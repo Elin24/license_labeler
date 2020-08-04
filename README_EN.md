@@ -13,7 +13,7 @@ License Plate Labeler is a labeling tool for vehicles and license plates in vide
 
 ------
 
-###Characteristic
+### Characteristic
 1. Easy to deploy, workload can be distributed to achieve multi-person labeling
 2. The tool contains a linear interpolation function, which can be marked every multiple frames, which reduces the workload relatively
 
