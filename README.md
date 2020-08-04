@@ -25,7 +25,7 @@
 
 1. 将该repository 克隆到本地工作区:
 
-*   git clone https://github.com/Elin24/lplabeler.git
+*   git clone https://github.com/Elin24/license_labeler.git
 
 *   cd lplabeler
 
